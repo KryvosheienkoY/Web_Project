@@ -1,0 +1,809 @@
+*, *:after, *:before {
+  box-sizing: border-box; }
+
+html {
+  min-width: 1105px; }
+
+p {
+  margin: 20px;
+  font-size: 18px;
+  color: #464646; }
+
+#menuID, .breadcrumbs {
+  max-width: 1250px; }
+
+.menu_toggle {
+  display: none;
+  cursor: pointer;
+  background-color: #0099CC;
+  border: 0;
+  padding: 10px;
+  height: 40px;
+  width: 40px; }
+  .menu_toggle:hover {
+    background-color: #0099CC; }
+
+.menu_toggle_bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  transition: 0.15s cubic-bezier(0.75, -0.55, 0.25, 1.55); }
+  .menu_toggle_bar + .menu_toggle_bar {
+    margin-top: 4px; }
+
+.animenu__toggle--active .menu_toggle_bar {
+  margin: 0;
+  position: absolute; }
+  .animenu__toggle--active .menu_toggle_bar:nth-child(1) {
+    transform: rotate(45deg); }
+  .animenu__toggle--active .menu_toggle_bar:nth-child(2) {
+    opacity: 0; }
+  .animenu__toggle--active .menu_toggle_bar:nth-child(3) {
+    transform: rotate(-45deg); }
+
+.menu {
+  display: inline-block;
+  width: 100%;
+  background-color: #0099CC; }
+  .menu .myUlWrap {
+    width: 60%;
+    margin-left: 4%;
+    display: inline-block;
+    text-align: right; }
+  .menu ul {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    list-style: none;
+    font: 0 -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+  .menu li, .menu a {
+    display: inline-block;
+    font-size: 15px; }
+  .menu a {
+    color: white;
+    text-decoration: none; }
+    .menu a:hover {
+      opacity: 0.7; }
+
+.animenu__nav {
+  background-color: #0099CC; }
+  .animenu__nav li {
+    position: relative;
+    border-right: 1px solid #33ccff; }
+    .animenu__nav li a {
+      padding: 10px 30px;
+      text-transform: uppercase; }
+    .animenu__nav li:hover ul {
+      opacity: 1;
+      visibility: visible;
+      margin: 0; }
+    .animenu__nav li:hover a {
+      color: #fff; }
+    .animenu__nav li:focus-within ul {
+      opacity: 1;
+      visibility: visible;
+      margin: 0; }
+    .animenu__nav li:focus-within a {
+      color: #fff; }
+  .animenu__nav__hasDropdown:before {
+    content: "";
+    position: absolute;
+    border: 4px solid transparent;
+    border-bottom: 0;
+    border-top-color: currentColor;
+    top: 50%;
+    margin-top: -2px;
+    right: 10px; }
+
+.menu_nav_dropdown {
+  min-width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  margin: 20px 0 0 0;
+  background-color: #1ac6ff;
+  transition: margin .15s, opacity .15s; }
+  .menu_nav_dropdown li {
+    width: 100%;
+    border-bottom: 1px solid #4dd2ff; }
+    .menu_nav_dropdown li:first-child a:after {
+      content: '';
+      position: absolute;
+      height: 0;
+      width: 0;
+      left: 1em;
+      top: -6px;
+      border: 6px solid transparent;
+      border-top: 0;
+      border-bottom-color: inherit; }
+    .menu_nav_dropdown li:last-child {
+      border: 0; }
+  .menu_nav_dropdown a {
+    padding: 10px;
+    width: 100%;
+    border-color: #1ac6ff; }
+    .menu_nav_dropdown a:hover {
+      background-color: #0099CC;
+      border-color: #0099CC;
+      color: #fff; }
+    .menu_nav_dropdown a:focus-within {
+      background-color: #0099CC;
+      border-color: #0099CC;
+      color: #fff; }
+
+@media screen and (max-width: 620px) {
+  .menu_toggle {
+    display: inline-block; }
+
+  .animenu__nav,
+  .menu_nav_dropdown {
+    display: none; }
+
+  .animenu__nav {
+    margin: 10px 0;
+    float: right; }
+    .animenu__nav li {
+      width: 100%;
+      border-right: 0;
+      border-bottom: 1px solid #4dd2ff; }
+      .animenu__nav li:last-child {
+        border: 0; }
+      .animenu__nav li:first-child a:after {
+        content: '';
+        position: absolute;
+        height: 0;
+        width: 0;
+        left: 1em;
+        top: -6px;
+        border: 6px solid transparent;
+        border-top: 0;
+        border-bottom-color: inherit; }
+      .animenu__nav li a {
+        width: 100%;
+        padding: 10px;
+        border-color: #0099CC;
+        position: relative; }
+    .animenu__nav a:hover {
+      background-color: #0099CC;
+      border-color: #0099CC;
+      color: #fff; }
+
+  .menu_nav_dropdown {
+    position: static;
+    background-color: #1ac6ff;
+    margin: 0;
+    transition: none;
+    visibility: visible;
+    opacity: 1; }
+    .menu_nav_dropdown li:first-child a:after {
+      content: none; }
+    .menu_nav_dropdown a {
+      padding-left: 20px;
+      width: 100%; }
+
+  .animenu__nav--open {
+    display: block !important; }
+    .animenu__nav--open .menu_nav_dropdown {
+      display: block; } }
+.stickyMenu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100; }
+
+.stickyMenu + .content {
+  padding-top: 102px; }
+
+ul.stickyBreadCrumbs {
+  position: fixed;
+  top: 0;
+  margin-top: 110px;
+  width: 100%; }
+
+#mymap {
+  display: none !important; }
+
+.siteHeader {
+  display: inline-block;
+  width: 35%; }
+  .siteHeader * {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px; }
+
+.siteName {
+  font-family: "Arial Black", fantasy;
+  font-size: 35px;
+  font-weight: lighter; }
+
+.sliderGallery {
+  position: relative;
+  margin-top: 10px; }
+
+.imageContainer {
+  display: none;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s; }
+  .imageContainer img {
+    width: 100%;
+    height: 200px; }
+
+/* Fading animation */
+@-webkit-keyframes imageContainer {
+  from {
+    opacity: 0.4; }
+  to {
+    opacity: 1; } }
+@keyframes imageContainer {
+  from {
+    opacity: 0.4; }
+  to {
+    opacity: 1; } }
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 48%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0; }
+  .prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8); }
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px; }
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: rgba(173, 218, 234, 0.99);
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease; }
+
+.activeMenu, .dot:hover {
+  background-color: #0099CC; }
+
+.breadcrumbs {
+  padding: 10px 16px;
+  margin: 0;
+  list-style: none;
+  background-color: rgba(173, 218, 234, 0.99); }
+  .breadcrumbs li {
+    display: inline;
+    font-size: 18px; }
+    .breadcrumbs li a {
+      color: black;
+      text-decoration: none; }
+      .breadcrumbs li a:hover {
+        color: #01447e;
+        text-decoration: underline;
+        cursor: pointer; }
+    .breadcrumbs li li + li:before {
+      padding: 8px;
+      color: black;
+      content: "/\00a0"; }
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box; }
+
+/* Set a style for all buttons */
+.logButton {
+  background-color: #0099CC;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%; }
+  .logButton:hover {
+    opacity: 0.8; }
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336; }
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative; }
+
+img.avatar {
+  width: 200px;
+  height: 200px; }
+
+.containerM {
+  padding: 16px; }
+
+span.psw {
+  float: right;
+  padding-top: 16px; }
+
+/* The Modal (background) */
+.formModal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  padding-top: 60px; }
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 1% auto 15% auto;
+  /* 1% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 60%;
+  /* Could be more or less, depending on screen size */ }
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold; }
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer; }
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s; }
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0); }
+  to {
+    -webkit-transform: scale(1); } }
+@keyframes animatezoom {
+  from {
+    transform: scale(0); }
+  to {
+    transform: scale(1); } }
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none; }
+
+  .cancelbtn {
+    width: 100%; } }
+#contentID {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 30px 20px; }
+  #contentID div {
+    display: none; }
+  #contentID .headerForP {
+    color: #0a66ba;
+    font-size: 25px;
+    font-weight: bolder;
+    margin: 10px; }
+
+.activePage {
+  display: inline-block !important; }
+  .activePage * {
+    display: inline-block !important; }
+
+#homeID .homeTextVideoContainer {
+  display: inline-block;
+  justify-content: center;
+  vertical-align: middle; }
+#homeID .homeText {
+  display: inline-block;
+  width: 60%; }
+#homeID .video {
+  display: inline-block;
+  width: 35%;
+  vertical-align: top; }
+#homeID .im3gallery {
+  width: 100%;
+  display: inline-block;
+  justify-content: center; }
+  #homeID .im3gallery .imWrap, #homeID .im3gallery img {
+    width: 300px;
+    height: 300px;
+    justify-content: center;
+    display: inline-block; }
+  #homeID .im3gallery .imWrap {
+    margin: 4%; }
+
+#contactsID {
+  display: inline-block;
+  justify-content: center;
+  width: 100%;
+  margin: 30px; }
+  #contactsID .contactsText {
+    display: inline-block;
+    width: 25%; }
+    #contactsID .contactsText #share-buttons {
+      display: inline-block; }
+      #contactsID .contactsText #share-buttons img {
+        width: 35px;
+        margin: 10px;
+        display: inline-block; }
+      #contactsID .contactsText #share-buttons a {
+        border: 0;
+        text-decoration: none; }
+  #contactsID .map {
+    float: right;
+    width: 60%;
+    height: 300px;
+    display: inline-block; }
+
+#yourAccountID {
+  text-align: center;
+  width: 100%; }
+  #yourAccountID .info {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 70px; }
+  #yourAccountID p {
+    text-align: center;
+    font-weight: bolder; }
+
+#yourStatsID {
+  width: 100%; }
+  #yourStatsID .leftMenu {
+    width: 200px;
+    display: inline;
+    vertical-align: top; }
+    #yourStatsID .leftMenu a {
+      margin: 10px 10px 10px 15px;
+      padding: 5px;
+      width: 100%;
+      outline: none;
+      color: #0a66ba;
+      font-size: 15px;
+      text-transform: uppercase;
+      cursor: pointer; }
+      #yourStatsID .leftMenu a:hover {
+        opacity: 0.7; }
+  #yourStatsID .rightMenu {
+    width: calc(90% - 250px);
+    vertical-align: top;
+    margin: 0 0 0 50px;
+    padding: 10px;
+    background-color: rgba(249, 253, 255, 0.99); }
+
+#playID .gameDescription {
+  width: 30%;
+  margin-right: 1%;
+  margin-left: 1%;
+  vertical-align: top; }
+
+.blocked {
+  display: none !important; }
+
+.gameFieldBLock {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  vertical-align: top;
+  width: 65%;
+  min-height: 400px;
+  min-width: 400px;
+  margin-right: 1%;
+  margin-left: 1%;
+  margin-top: 20px;
+  /*
+   * Styles for the deck of cards
+   */
+  /*
+   * Styles for the Score Panel
+   */
+  /*
+   * Styles for congratulations modal
+   */
+  /* animations */ }
+  .gameFieldBLock .deck {
+    width: 400px;
+    height: 400px;
+    background: rgba(173, 218, 234, 0.99);
+    padding: 1rem;
+    border-radius: 4px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0; }
+    .gameFieldBLock .deck .card {
+      height: 85px;
+      width: 85px;
+      margin: 0.2rem 0.2rem;
+      background: #464245;
+      color: #ffffff;
+      font-size: 0;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      vertical-align: middle;
+      padding: 15px; }
+    .gameFieldBLock .deck .open {
+      transform: rotateY(0);
+      background: #02b3e4;
+      cursor: default;
+      animation-name: flipInY;
+      -webkit-backface-visibility: visible !important;
+      backface-visibility: visible !important;
+      animation-duration: .75s;
+      font-size: 50px; }
+    .gameFieldBLock .deck .match {
+      cursor: default;
+      background: #0099CC;
+      display: inline-block !important;
+      animation-name: rubberBand;
+      -webkit-backface-visibility: visible !important;
+      backface-visibility: visible !important;
+      animation-duration: .75s;
+      font-size: 50px; }
+    .gameFieldBLock .deck .unmatched {
+      animation-name: pulse;
+      -webkit-backface-visibility: visible !important;
+      backface-visibility: visible !important;
+      animation-duration: .75s;
+      background: #e2043b; }
+    .gameFieldBLock .deck .disabled {
+      pointer-events: none;
+      opacity: 0.9; }
+  .gameFieldBLock .score-panel {
+    display: inline-block;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 30px;
+    color: #0a66ba; }
+    .gameFieldBLock .score-panel .stars {
+      padding: 0;
+      display: inline-block;
+      margin: 0 5px 0 0; }
+      .gameFieldBLock .score-panel .stars li {
+        list-style: none;
+        display: inline-block; }
+    .gameFieldBLock .score-panel .restart {
+      cursor: pointer; }
+    .gameFieldBLock .score-panel .timer {
+      display: inline-block; }
+  .gameFieldBLock .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    justify-content: center;
+    vertical-align: middle; }
+    .gameFieldBLock .overlay:target {
+      visibility: visible;
+      opacity: 1; }
+  .gameFieldBLock .popup {
+    margin: 15% 20% 0 20%;
+    width: 55%;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+    transition: all 3s ease-in-out; }
+    .gameFieldBLock .popup h2 {
+      font-size: 33px;
+      margin-top: 0;
+      color: #0a66ba; }
+    .gameFieldBLock .popup .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333; }
+      .gameFieldBLock .popup .close:hover {
+        color: #E5F720; }
+    .gameFieldBLock .popup content-1, .gameFieldBLock .popup .content-2 {
+      max-height: 30%;
+      width: 100%;
+      overflow: auto;
+      text-align: center; }
+  .gameFieldBLock .show {
+    visibility: visible !important;
+    opacity: 100 !important;
+    font-size: 50px; }
+  .gameFieldBLock #starRating li {
+    display: inline-block; }
+  .gameFieldBLock #play-again {
+    background-color: #0099CC;
+    padding: 0.7rem 1rem;
+    font-size: 1.1rem;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    color: #ffffff;
+    border-radius: 5px; }
+@keyframes flipInY {
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0; }
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    animation-timing-function: ease-in; }
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1; }
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg); }
+  to {
+    transform: perspective(400px); } }
+@keyframes rubberBand {
+  from {
+    transform: scale3d(1, 1, 1); }
+  30% {
+    transform: scale3d(1.25, 0.75, 1); }
+  40% {
+    transform: scale3d(0.75, 1.25, 1); }
+  50% {
+    transform: scale3d(1.15, 0.85, 1); }
+  65% {
+    transform: scale3d(0.95, 1.05, 1); }
+  75% {
+    transform: scale3d(1.05, 0.95, 1); }
+  to {
+    transform: scale3d(1, 1, 1); } }
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1); }
+  50% {
+    transform: scale3d(1.2, 1.2, 1.2); }
+  to {
+    transform: scale3d(1, 1, 1); } }
+#MyTable_wrapper {
+  margin-bottom: 70px; }
+
+#MyTable_info, #MyTable_length {
+  display: none !important; }
+
+#table1 {
+  background-color: white;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  margin: 10px 10px 100px;
+  padding: 20px; }
+  #table1 tr {
+    width: 100%;
+    padding: 5px;
+    text-align: center; }
+  #table1 td, #table1 th {
+    padding: 3px 2px;
+    width: 49%; }
+  #table1 tbody {
+    width: 100%;
+    font-size: 22px; }
+  #table1 tr:nth-child(even) {
+    background: rgba(173, 218, 234, 0.99); }
+  #table1 thead {
+    background: #0099CC;
+    width: 100%; }
+    #table1 thead th {
+      font-size: 25px;
+      font-weight: bold;
+      color: #FFFFFF; }
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 100%;
+  z-index: 1; }
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  background-color: #0099CC;
+  color: white;
+  display: block;
+  border: none;
+  width: 100%;
+  text-align: left; }
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: rgba(173, 218, 234, 0.99); }
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: #0d81ea;
+  display: inline-block !important; }
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  padding-left: 8px; }
+
+input[type="text"] {
+  width: 100%;
+  border: 1px solid #0a66ba;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s; }
+
+.searchWrap input[type="text"] {
+  padding-left: 40px;
+  border-color: dodgerBlue; }
+
+.searchWrap {
+  position: relative;
+  width: 130px;
+  margin-right: 10px; }
+
+.searchWrap i {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  padding: 9px 8px;
+  color: rgba(173, 218, 234, 0.99);
+  transition: 0.3s; }
+
+.searchWrap.inputIconBg i {
+  background-color: dodgerBlue;
+  color: #fff;
+  padding: 9px 4px;
+  border-radius: 4px 0 0 4px;
+  border-color: #0a66ba; }
+
+.marked {
+  background-color: rgba(173, 218, 234, 0.99); }
+
+/*# sourceMappingURL=style.css.map */

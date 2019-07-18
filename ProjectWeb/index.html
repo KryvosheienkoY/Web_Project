@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain Trainer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="datatables.css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<!--logIn form-->
+<div id="formLogin" class="formModal">
+
+    <form class="modal-content animate">
+        <div class="imgcontainer">
+            <span class="close" title="Close" onclick="document.getElementById('formLogin').style.display='none'">&times;</span>
+            <img src="img/male1.jpg" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="containerM" id="modalLogInContainer">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="usernameLogin" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="passwordLogin" required>
+            <input type="button" class="logButton" onclick="processLoginForm()" value="Login">
+        </div>
+    </form>
+</div>
+<!--end of logIN-->
+
+<!--Register form-->
+
+<div id="formRegister" class="formModal">
+    <form class="modal-content animate">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('formRegister').style.display='none'" class="close"
+                  title="Close">&times;</span>
+            <img src="img/male1.jpg" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="containerM" id="modalRegContainer">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="usernameReg" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="passwordReg" required>
+            <input type="button" class="logButton " onclick="processRegistrationForm()" value=" Register">
+        </div>
+    </form>
+</div>
+<!--end of Register-->
+
+<!--- menu navigation  --->
+<nav class="menu " role="navigation" aria-label="Menu" id="menuID">
+    <!--Header of site (logo+ log in)-->
+    <div class="siteHeader" id="siteHeaderID">
+        <img src="img/bulb_mind_brain_svg-512.png" alt="logoIcon" width="110" height="110">
+        <span class="siteName">Brain Trainer</span>
+    </div>
+    <div class="myUlWrap">
+
+        <ul class="animenu__nav" id="animenu__navID">
+            <li>
+                <div class="searchWrap inputIconBg">
+                    <input type="text" placeholder="Search" id="searchID" onKeyDown="if(event.keyCode===13) search();">
+                    <i class="fa fa-search"></i>
+                </div>
+            </li>
+            <li><a href="#" onclick="pageControl('homeID')">Home</a></li>
+            <li><a href="#" onclick="pageControl('contactsID')">Contacts</a></li>
+            <li><a href="#" class="menu_nav_withDropdown" onclick="pageControl('playID')">Play</a></li>
+            <li><a href="#" class="menu_nav_withDropdown">Your Profile</a>
+                <ul class="menu_nav_dropdown">
+                    <li><a href="#" onclick="pageControl('yourAccountID')">Your account</a></li>
+                    <li><a href="#" onclick="pageControl('yourStatsID')">Stats</a></li>
+                    <li><a href="#" onclick="loadFirstLogPage()">Logout</a></li>
+                </ul>
+            </li>
+
+            <!--first page - log in\register-->
+            <li><a href="#" class="logInButton"
+                   onclick="document.getElementById('formLogin').style.display='block'">Log
+                in
+            </a></li>
+            <li><a href="#" class="RegisterButton"
+                   onclick="document.getElementById('formRegister').style.display='block'">Register
+            </a></li>
+        </ul>
+    </div>
+</nav>
+<!--- End menu navigation --->
+
+<!--breadcrumbs-->
+<ul class="breadcrumbs" id="breadcrumbsID"></ul>
+
+<!--Slider of images-->
+<div id="sliderGalleryID">
+    <div class="sliderGallery">
+        <div class="imageContainer" id="im11">
+            <img alt="sliderPhoto" src="img/neurons.web__0.png">
+        </div>
+        <div class="imageContainer" id="im12">
+            <img alt="sliderPhoto" src="img/The-Mastermind.jpg">
+        </div>
+        <div class="imageContainer" id="im13">
+            <img alt="sliderPhoto" src=" img/imSlider.jpg">
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <!--dots for  slider-->
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+</div>
+
+<div class="content" id="contentID">
+    <div class="firstLogPage activePage" id="firstLogPageID">
+        <!--// no breadcrumbs-->
+        <!--//just info-->
+        <!--// only log In+ register-->
+        <p class="headerForP" id="header1LogID">Hello!</p>
+        <br>
+        <p id="info1LogID">
+            Let`s improve your life with us!
+        </p>
+        <br>
+        <p class="headerForP" id="header2LogID">Get Started</p>
+        <br>
+        <p id="info2LogID">
+            To start press "Log in" or "Register".
+        </p>
+
+    </div>
+    <div class="home" id="homeID">
+        <div class="homeTextVideoContainer">
+            <div class="homeText">
+                <p class="headerForP" id="header1HomeID">The purpose of this web-service</p>
+                <p id="info1HomeID">
+                    We believe in helping people keep their brains challenged. So we found your solution of mental
+                    strength. We created a simple online tool to allow anyone to train core cognitive abilities.
+                    <br>
+                    With this app you will improve memory, increase focus, find calm - sharp the skills you use every
+                    day.
+                </p>
+                <p class="headerForP " id="header2HomeID">Why is Brain Training Important?</p>
+                <p id="info2HomeID">
+                    Brain training apps and games are a great way to keep your mental faculties clear and on point.
+                    Brain training encourages neuroplasticity through mental stimulation. Neuroplasticity is the brain’s
+                    dynamic ability to change and adapt, and studies show that brain training improves memory, executive
+                    function, and brain processing speed. Aging doesn’t have to mean a sharp decline in mental fitness.
+                    Research shows that keeping your brain stimulated keeps your cognitive health strong as the years
+                    pass. Make sure your mind gets a workout with brain training, and your mental health is likelier to
+                    stay youthful.
+                </p>
+            </div>
+            <div class="video">
+                <video controls width="100%" height="240">
+                    <source src="img/Brain%20-%204054.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="im3gallery">
+            <div class="imWrap">
+                <img src="img/the-brain-has-muscles-for-thinking-as-the-legs-have-muscles-for-walking-quote-1.jpg"
+                     alt="imgGalerryQuote">
+            </div>
+            <div class="imWrap">
+                <img src="img/quote.jpeg" alt="imgGalerryQuote">
+            </div>
+            <div class="imWrap">
+                <img src="img/the-brain-is-a-muscle-and-im-a-kind-of-body-builder-quote-1.jpg" alt="imgGalerryQuote">
+            </div>
+            <div class="imWrap">
+                <img src="img/quote.jpeg" alt="imgGalerryQuote">
+            </div>
+            <div class="imWrap">
+                <img src="img/the-brain-has-muscles-for-thinking-as-the-legs-have-muscles-for-walking-quote-1.jpg"
+                     alt="imgGalerryQuote">
+            </div>
+            <div class="imWrap">
+                <img src="img/the-brain-is-a-muscle-and-im-a-kind-of-body-builder-quote-1.jpg" alt="imgGalerryQuote">
+            </div>
+        </div>
+    </div>
+    <div class="contacts" id="contactsID">
+        <div class="contactsText">
+            <p class="headerForP" id="header1ContactsID">Our Contacts </p>
+            <p id="info1ContactsID">Address: Ukraine, Kyiv, St. Rudenko 18
+                <br> <br>Phone: 0958345678
+                <br> <br>Fax: +39 06 4820099
+                <br> <br>E-mail: <a href="mailto:braintrainer@gmail.com">braintrainer@gmail.com</a>
+                <br><br>OFFICE HOURS:
+                <br><br>Monday - Friday: 8:30 A.M. - 5:30 P.M
+            </p>
+            <br>
+            <p class="headerForP" id="header2ContactsID">Stay Connected</p>
+            <br>
+            <div id="share-buttons">
+                <!-- Facebook -->
+                <a href="http://www.facebook.com/sharer.php?u=http://localhost:63342/ProjectWeb/index.html?_ijt=vc1nb4oj4ntd628p9au7lnugrb"
+                   target="_blank">
+                    <img src="img/facebook.png" alt="Facebook"/>
+                </a>
+                <!-- Google+ -->
+                <a href="https://plus.google.com/share?url=http://localhost:63342/ProjectWeb/index.html?_ijt=vc1nb4oj4ntd628p9au7lnugrb"
+                   target="_blank">
+                    <img src="img/google.png" alt="Google"/>
+                </a>
+
+                <!-- Twitter -->
+                <a href="https://twitter.com/share?url=http://localhost:63342/ProjectWeb/index.html?_ijt=vc1nb4oj4ntd628p9au7lnugrb"
+                   target="_blank">
+                    <img src="img/twitter.png" alt="Twitter"/>
+                </a>
+
+            </div>
+        </div>
+        <div class="map" id="map">
+            <script>
+                // Initialize and add the map
+                function initMap() {
+                    // The location of Uluru
+                    var uluru = {lat: 50.464611, lng: 30.520003};
+                    // The map, centered at Uluru
+                    var map = new google.maps.Map(
+                        document.getElementById('map'), {zoom: 4, center: uluru});
+                    // The marker, positioned at Uluru
+                    var marker = new google.maps.Marker({position: uluru, map: map});
+                }
+            </script>
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWyKAbQMeSUJ6LE4CWDWGFwAHtCy4h6p4&callback=initMap">
+            </script>
+        </div>
+    </div>
+    <div class="yourAccount" id="yourAccountID">
+        <img src="img/male1.jpg" class="avatar">
+        <br>
+        <div class="info">
+            <p id="myAccountID">My Account</p>
+            <br>
+            <p id="myUsernameID">Username: </p>
+            <span id="usernameYourAccountID"></span>
+            <br>
+            <p id="myPasswordID">Password: </p>
+            <span id="passwordYourAccountID"></span>
+        </div>
+    </div>
+
+    <div class="stats" id="yourStatsID">
+        <div class="leftMenu" id="leftMenuID">
+            <button class="dropdown-btn">Menu
+                <i class="fas fa-caret-right"></i>
+            </button>
+            <div class="dropdown-container">
+                <a id="yourStatsButton" onclick="blockStats('rightCompareStatsID')">Goal Plan</a>
+                <a id="compareStatsButton" onclick="blockStats('rightYourStatsID')">Top Stats</a>
+            </div>
+        </div>
+        <div class="rightMenu">
+            <div class="rightStats" id="rightYourStatsID">
+                <p class="headerForP" id="yourStatisticsID">Goal Plan</p>
+                <!--table1 start-->
+                <table id="table1">
+                    <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Goal moves</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Day 1</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>Day 2</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>Day 3</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>Day 4</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Day 5</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>Day 6</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Day 7</td>
+                        <td>9</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--table1 end-->
+            </div>
+            <div class="rightStats blocked" id="rightCompareStatsID">
+                <p class="headerForP" id="compareID">Top Statistics</p>
+                <br>
+                <!--table2 start-->
+                <table id="MyTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Username</th>
+                        <th>Moves</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>David</td>
+                        <td>8</td>
+                        <td>20s</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>John</td>
+                        <td>8</td>
+                        <td>21s</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Sinha</td>
+                        <td>8</td>
+                        <td>24s</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Andrew</td>
+                        <td>8</td>
+                        <td>39s</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Kumar</td>
+                        <td>9</td>
+                        <td>30s</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>qwerty</td>
+                        <td>9</td>
+                        <td>35s</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Shekhawat</td>
+                        <td>10</td>
+                        <td>35s</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>kkk</td>
+                        <td>11</td>
+                        <td>27s</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Arc</td>
+                        <td>11</td>
+                        <td>46s</td>
+                    </tr>
+                    <tr>
+                        <
+                        <td>10</td>
+                        <td>syst</td>
+                        <td>11</td>
+                        <td>48s</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Pharma</td>
+                        <td>11</td>
+                        <td>59s</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Katya_99</td>
+                        <td>12</td>
+                        <td>20s</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Katya_999</td>
+                        <td>12</td>
+                        <td>26s</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Aa_99</td>
+                        <td>12</td>
+                        <td>30s</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Roman</td>
+                        <td>12</td>
+                        <td>42s</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Katya_999</td>
+                        <td>12</td>
+                        <td>43s</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Aa_99</td>
+                        <td>12</td>
+                        <td>44s</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Roman</td>
+                        <td>12</td>
+                        <td>49s</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>KRRoman</td>
+                        <td>18</td>
+                        <td>19s</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Star</td>
+                        <td>20</td>
+                        <td>9s</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>zxcvbnm</td>
+                        <td>22</td>
+                        <td>19s</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>wwww</td>
+                        <td>22</td>
+                        <td>19s</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>rrr</td>
+                        <td>22</td>
+                        <td>19s</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>admin</td>
+                        <td>24</td>
+                        <td>21s</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>aaaaa</td>
+                        <td>30</td>
+                        <td>21s</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>q</td>
+                        <td>35</td>
+                        <td>26s</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>zebr</td>
+                        <td>39</td>
+                        <td>59s</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--table2 end-->
+            </div>
+        </div>
+    </div>
+    <div class="play" id="playID">
+        <div class="gameDescription">
+            <p class="headerForP" id="headerPlayId">Memory Matrix</p>
+            <p id="playDescriptionID"> Memory Matrix is a basic matching game to test the your memory. In a deck of
+                paired cards, you need to match each pair to win the game as quickly as you can.</p>
+        </div>
+        <div class="gameFieldBLock ">
+
+            <ul class="deck" id="card-deck">
+                <!--16 li elements - field 4x4-->
+                <li class="card" type="fa-dragon">
+                    <i class="fas fa-dragon"></i>
+                </li>
+                <li class="card" type="fa-dragon">
+                    <i class="fas fa-dragon"></i>
+                </li>
+                <li class="card " type="fa-cat">
+                    <i class="fas fa-cat"></i>
+                </li>
+                <li class="card" type="fa-cat">
+                    <i class="fas fa-cat"></i>
+                </li>
+                <li class="card" type="fa-dove">
+                    <i class="fas fa-dove"></i>
+                </li>
+                <li class="card" type="fa-dove">
+                    <i class="fas fa-dove"></i>
+                </li>
+                <li class="card " type="fa-heart">
+                    <i class="fas fa-heart"></i>
+                </li>
+                <li class="card" type="fa-heart">
+                    <i class="fas fa-heart"></i>
+                </li>
+                <li class="card" type="fa-key">
+                    <i class="fas fa-key"></i>
+                </li>
+                <li class="card" type="fa-key">
+                    <i class="fas fa-key"></i>
+                </li>
+                <li class="card " type="fa-paw">
+                    <i class="fas fa-paw"></i>
+                </li>
+                <li class="card" type="fa-paw">
+                    <i class="fas fa-paw"></i>
+                </li>
+                <li class="card" type="fa-feather">
+                    <i class="fas fa-feather"></i>
+                </li>
+                <li class="card" type="fa-feather">
+                    <i class="fas fa-feather"></i>
+                </li>
+                <li class="card " type="fa-book">
+                    <i class="fas fa-book"></i>
+                </li>
+                <li class="card" type="fa-book">
+                    <i class="fas fa-book"></i>
+                </li>
+            </ul>
+
+            <section class="score-panel">
+                <ul class="stars">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+                <br>
+                <span class="moves">0</span> Move(s)
+                <br>
+                <div class="timer" id="timerID">
+                </div>
+                <br>
+                <div class="restart" onclick=startGame()>
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </section>
+
+            <!--end of game block-->
+            <div id="popup1" class="overlay">
+                <div class="popup">
+                    <div class="content-1">
+                        <h2>Congratulations!</h2>
+                    </div>
+                    <br>
+                    <a class="close" onclick="closeModal()">×</a>
+                    <div class="content-2">
+                        <p>You made <span id=finalMove> </span> moves
+                            <br>in <span id=totalTime> </span></p>
+                        <p>Rating: <span id=starRating></span></p>
+                    </div>
+                    <button id="play-again" onclick="playAgain()">
+                        Play again
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- End Wrap -->
+
+</div>
+
+</body>
+</html>
